@@ -1,2 +1,19 @@
 *.mpg
 Kitware Data.html
+*.mp4
+*.avi
+*.mkv
+*.mov
+*.wmv
+*.flv
+*.m4v
+*.webm
+*.3gp
+*.jpg
+*.jpeg
+*.png
+*.html
+/.venv
+*/__pycache__/
+*.pt
+*.json

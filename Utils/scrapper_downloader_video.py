@@ -19,7 +19,7 @@ async def download_file(session, url, filepath):
 
 async def scrape_and_download_videos():
     # URL of the collection
-    url = "https://data.kitware.com/#collection/611e77a42fa25629b9daceba/folder/611e78892fa25629b9dacf8d"
+    url = "https://www.youtube.com/"
     
     # Create videos directory if it doesn't exist
     videos_dir = Path("./videos")

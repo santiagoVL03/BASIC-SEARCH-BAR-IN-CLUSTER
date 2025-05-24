@@ -1,25 +1,64 @@
-import cv2
-import json
-import os
-import sys
 from ultralytics import YOLO
-from Utils import functions
+import os, json, sys
+import Utils.functions as utils
 
 VIDEO_PATH = "videos"
 VIDEO_FILES = []
-if __name__ == "__main__":
-    # Get all video files from the VIDEO_PATH directory
-    
-    supported_formats = ['.mp4', '.avi', '.mov', '.mkv', '.mpg']  # Add more formats if needed
+MODEL = YOLO("yolov8n.pt")  # cargar modelo solo una vez
 
+if __name__ == "__main__":
+    supported_formats = ['.mp4', '.avi', '.mov', '.mkv', '.mpg']
     if not os.path.exists(VIDEO_PATH):
         print(f"Error: The directory {VIDEO_PATH} does not exist.")
         sys.exit(1)
 
-    # List all files in the video directory
-    for file in os.listdir(VIDEO_PATH):
-        file_path = os.path.join(VIDEO_PATH, file)
-        if os.path.isfile(file_path) and any(file.lower().endswith(ext) for ext in supported_formats):
-            VIDEO_FILES.append(file)
+    VIDEO_FILES = [f for f in os.listdir(VIDEO_PATH)
+                   if os.path.isfile(os.path.join(VIDEO_PATH, f)) and f.lower().endswith(tuple(supported_formats))]
 
-    print(f"Found {len(VIDEO_FILES)} video files: {VIDEO_FILES}")
+    for video in VIDEO_FILES:
+        video_path = os.path.join(VIDEO_PATH, video)
+        print(f"Processing video: {video_path}")
+        fps = utils.get_video_fps(video_path)
+        print(f"FPS: {fps}")
+
+        output_dir = os.path.join(VIDEO_PATH, "frames", os.path.splitext(video)[0])
+        utils.convert_video_to_frames(video_path, output_dir, frame_skip=120)
+
+        output_json_path = os.path.join(output_dir, f"{video}_detections.json")
+        if os.path.exists(output_json_path):
+            print(f"Skipping {video}, already processed.")
+            continue
+
+        all_results = {}
+        for frame_file in sorted(os.listdir(output_dir)):
+            frame_path = os.path.join(output_dir, frame_file)
+            try:
+                results = MODEL(frame_path)
+            except Exception as e:
+                print(f"Failed on {frame_file}: {e}")
+                continue
+
+            detections = []
+            for result in results:
+                for box in result.boxes:
+                    xyxy = box.xyxy[0].tolist()
+                    cls_id = int(box.cls[0])
+                    conf = float(box.conf[0])
+                    class_name = result.names[cls_id]
+                    detections.append({
+                        "class_id": cls_id,
+                        "class_name": class_name,
+                        "confidence": conf,
+                        "bbox": xyxy
+                    })
+
+            all_results[frame_file] = detections
+
+        with open(output_json_path, "w") as f:
+            json.dump(all_results, f, indent=2)
+        print(f"\n✔️ JSON saved: {output_json_path}")
+
+    if not VIDEO_FILES:
+        print("No video files found.")
+    else:
+        print(f"Found {len(VIDEO_FILES)} video files: {VIDEO_FILES}")
