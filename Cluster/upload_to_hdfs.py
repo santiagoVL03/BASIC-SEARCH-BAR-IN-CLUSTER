@@ -1,6 +1,5 @@
 import os
 import sys
-import subprocess
 import Utils.functions as utils
 
 VIDEO_PATH = "./videos"
@@ -21,7 +20,7 @@ if __name__ == "__main__":
     if not metadata_files:
         print("No metadata files found in the specified directory.")
         sys.exit(0)
-        
+
     if not os.path.exists(VIDEO_PATH):
         print(f"Error: The directory {VIDEO_PATH} does not exist.")
         sys.exit(1)
@@ -30,7 +29,7 @@ if __name__ == "__main__":
     if not video_files:
         print("No video or metadata files found in the specified directory.")
         sys.exit(0)
-        
+
     hdfs_video_directory = "/user/hdfs/videos"
     hdfs_metadata_directory = "/user/hdfs/metadata"
     print("Uploading video files to HDFS...")
