@@ -1,7 +1,19 @@
 import matplotlib.pyplot as plt
 import cv2
 import os
-    
+import subprocess
+import sys
+
+def run_command(command):
+    """Run a shell command and return the output."""
+    try:
+        result = subprocess.run(command, shell=True, check=True, text=True, capture_output=True)
+        return result.stdout.strip()
+    except subprocess.CalledProcessError as e:
+        print(f"Error running command '{command}': {e.stderr.strip()}")
+        sys.exit(1)
+
+
 def display_image(image, title="Image"):
     """
     Display an image using matplotlib.

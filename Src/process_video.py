@@ -1,10 +1,12 @@
 from ultralytics import YOLO
 import os, json, sys
 import Utils.functions as utils
+from pathlib import Path
 
-VIDEO_PATH = "videos"
+VIDEO_PATH = Path("./videos")
+METADATA_PATH = Path("./metadata")
 VIDEO_FILES = []
-MODEL = YOLO("yolov8n.pt")  # cargar modelo solo una vez
+MODEL = YOLO("yolov8n.pt")
 
 if __name__ == "__main__":
     supported_formats = ['.mp4', '.avi', '.mov', '.mkv', '.mpg']
@@ -12,19 +14,22 @@ if __name__ == "__main__":
         print(f"Error: The directory {VIDEO_PATH} does not exist.")
         sys.exit(1)
 
+    VIDEO_PATH.mkdir(exist_ok=True)
+
     VIDEO_FILES = [f for f in os.listdir(VIDEO_PATH)
                    if os.path.isfile(os.path.join(VIDEO_PATH, f)) and f.lower().endswith(tuple(supported_formats))]
 
     for video in VIDEO_FILES:
+        video_file = os.path.splitext(video)[0]
         video_path = os.path.join(VIDEO_PATH, video)
         print(f"Processing video: {video_path}")
         fps = utils.get_video_fps(video_path)
         print(f"FPS: {fps}")
 
         output_dir = os.path.join(VIDEO_PATH, "frames", os.path.splitext(video)[0])
-        utils.convert_video_to_frames(video_path, output_dir, frame_skip=120)
+        utils.convert_video_to_frames(video_path, output_dir, frame_skip=100)
 
-        output_json_path = os.path.join(output_dir, f"{video}_detections.json")
+        output_json_path = os.path.join(METADATA_PATH, f"{video_file}_detections.json")
         if os.path.exists(output_json_path):
             print(f"Skipping {video}, already processed.")
             continue
