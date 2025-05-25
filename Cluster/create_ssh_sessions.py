@@ -1,3 +1,22 @@
+"""
+    _summary_
+    This script creates SSH sessions to a master node and worker nodes in a cluster.
+    It executes an object detection script on each node and uploads the results to HDFS.
+    The script uses asyncio for asynchronous execution and paramiko for SSH connections.
+    The SSH credentials are hardcoded for demonstration purposes.
+    The script reads the node configuration from a file and executes the object detection script on each node.
+    The results are uploaded to HDFS using Hadoop commands.
+    The script is designed to be run as a standalone program.
+    It handles exceptions during SSH connection and command execution.
+    The script ensures that the SSH sessions are closed after execution.
+    The script is intended for use in a distributed computing environment where object detection tasks are performed on multiple nodes.
+    
+    Actually this script is not used in the project, but it can be useful for future implementations.
+
+    Returns:
+        _type_: _description_
+"""
+
 import os
 import sys
 import Utils.functions as utils

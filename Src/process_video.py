@@ -15,7 +15,8 @@ if __name__ == "__main__":
         sys.exit(1)
 
     VIDEO_PATH.mkdir(exist_ok=True)
-
+    METADATA_PATH.mkdir(exist_ok=True)
+    
     VIDEO_FILES = [f for f in os.listdir(VIDEO_PATH)
                    if os.path.isfile(os.path.join(VIDEO_PATH, f)) and f.lower().endswith(tuple(supported_formats))]
 
