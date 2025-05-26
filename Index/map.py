@@ -11,7 +11,7 @@ for line in sys.stdin:
         data = json.loads(line)
         for frame_name, detections in data.items():
             video_file = frame_name.split("|")[0] + ".json"
-            hdfs_path = f"/hduser/bigdata/nn/videos/{video_file}"
+            hdfs_path = f"/hduser/bigdata/nn/{video_file}"
             for obj in detections:
                 class_name = obj["class_name"]
                 print(f"{class_name}\t{hdfs_path}")

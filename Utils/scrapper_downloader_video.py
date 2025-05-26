@@ -52,7 +52,7 @@ async def scrape_and_download_videos():
             print("node.txt file not found. Using default node.")
             node = None
         
-        videos_per_node = total_videos // 4
+        videos_per_node = total_videos // 5
 
         if node is not None:
             try:
