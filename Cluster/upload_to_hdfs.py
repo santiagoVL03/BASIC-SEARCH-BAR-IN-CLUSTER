@@ -30,8 +30,9 @@ if __name__ == "__main__":
         print("No video or metadata files found in the specified directory.")
         sys.exit(0)
 
-    hdfs_video_directory = "/"
-    hdfs_metadata_directory = "/"
+    hdfs_video_directory = "/videos"
+    hdfs_metadata_directory = "/metadata"
+    """
     print("Uploading video files to HDFS...")
     for video in video_files:
         video_path = os.path.join(VIDEO_PATH, video)
@@ -39,6 +40,7 @@ if __name__ == "__main__":
             print(f"Uploading {video} to HDFS...")
             upload_to_hdfs_hadoop(video_path, hdfs_video_directory)
             print(f"Uploaded {video} successfully.")
+    """
     print("Uploading metadata files to HDFS...")
     for metadata in metadata_files:
         metadata_path = os.path.join(METADATA_PATH, metadata)

@@ -10,10 +10,11 @@ for line in sys.stdin:
     try:
         data = json.loads(line)
         for frame_name, detections in data.items():
-            video_file = frame_name.split("|")[0] + ".json"
-            hdfs_path = f"/hduser/bigdata/nn/{video_file}"
+            video_base = frame_name.split("|")[0]
+            video_file = os.path.basename(video_base).replace(".mpg", "_detections.json")
+            hdfs_path = f"/metadata/{video_file}"
             for obj in detections:
                 class_name = obj["class_name"]
                 print(f"{class_name}\t{hdfs_path}")
     except Exception as e:
-        continue
+        print(f"Mapper error: {e}", file=sys.stderr)
