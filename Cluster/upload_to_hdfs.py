@@ -30,7 +30,7 @@ if __name__ == "__main__":
         print("No video or metadata files found in the specified directory.")
         sys.exit(0)
 
-    hdfs_video_directory = "/videos"
+    hdfs_video_directory = "/"
     hdfs_metadata_directory = "/metadata"
     """
     print("Uploading video files to HDFS...")
