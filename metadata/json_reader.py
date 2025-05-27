@@ -2,27 +2,16 @@ import os
 import json
 
 metadata_dir = "./metadata"
-output_items = []
 
 for filename in os.listdir(metadata_dir):
     if filename.endswith("_detections.json"):
         filepath = os.path.join(metadata_dir, filename)
-        with open(filepath, 'r') as f:
-            try:
+        try:
+            with open(filepath, "r") as f:
                 data = json.load(f)
-            except json.JSONDecodeError:
-                continue  # Ignorar archivos con formato incorrecto
+        except json.JSONDecodeError:
+            continue  # Ignora archivos con errores de formato JSON
 
-        for frame_name, detections in data.items():
-            video_base = frame_name.split("|")[0]
-            video_file = video_base.replace(".mpg", "_detections.json")
-            hdfs_path = f"/metadata/{video_file}"
-            for obj in detections:
-                class_name = obj.get("class_name")
-                if class_name:
-                    output_items.append(f"{class_name}\t{hdfs_path}")
-
-print(" ".join(output_items))
-output_json_path = os.path.join(metadata_dir, "json_reader.json")
-with open(output_json_path, "w") as f:
-    json.dump(output_items, f, indent=4)
+        # Sobrescribe el archivo con una versión compacta (1 línea)
+        with open(filepath, "w") as f:
+            json.dump(data, f, separators=(",", ":"))
