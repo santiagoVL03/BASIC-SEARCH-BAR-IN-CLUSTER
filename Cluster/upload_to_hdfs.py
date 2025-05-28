@@ -2,8 +2,8 @@ import os
 import sys
 import Utils.functions as utils
 
-VIDEO_PATH = "./videos"
-METADATA_PATH = "./metadata"
+VIDEO_PATH = "videos"
+METADATA_PATH = "metadata"
 
 def upload_to_hdfs_hadoop(local_file, hdfs_directory):
     utils.run_command(f"hadoop fs -put {local_file} {hdfs_directory}")
@@ -24,21 +24,23 @@ if __name__ == "__main__":
     if not os.path.exists(VIDEO_PATH):
         print(f"Error: The directory {VIDEO_PATH} does not exist.")
         sys.exit(1)
-    video_files = [f for f in os.listdir(VIDEO_PATH)
-                   if os.path.isfile(os.path.join(VIDEO_PATH, f)) and f.lower().endswith(tuple(supported_video_formats + supported_metadata_formats))]
-    if not video_files:
-        print("No video or metadata files found in the specified directory.")
-        sys.exit(0)
+    # video_files = [f for f in os.listdir(VIDEO_PATH)
+    #                if os.path.isfile(os.path.join(VIDEO_PATH, f)) and f.lower().endswith(tuple(supported_video_formats + supported_metadata_formats))]
+    # if not video_files:
+    #     print("No video or metadata files found in the specified directory.")
+    #     sys.exit(0)
 
     hdfs_video_directory = "/"
     hdfs_metadata_directory = "/metadata"
     print("Uploading video files to HDFS...")
+    """
     for video in video_files:
         video_path = os.path.join(VIDEO_PATH, video)
         if os.path.isfile(video_path):
             print(f"Uploading {video} to HDFS...")
             upload_to_hdfs_hadoop(video_path, hdfs_video_directory)
             print(f"Uploaded {video} successfully.")
+    """
     print("Uploading metadata files to HDFS...")
     for metadata in metadata_files:
         metadata_path = os.path.join(METADATA_PATH, metadata)

@@ -1,17 +1,17 @@
 #!/usr/bin/env python3
 import sys
+from collections import defaultdict
 
-current_class = None
-video_set = set()
+counts = defaultdict(int)
 
 for line in sys.stdin:
-    class_name, path = line.strip().split("\t")
-    if current_class != class_name:
-        if current_class:
-            print(f"{current_class}\t{','.join(sorted(video_set))}")
-        current_class = class_name
-        video_set = set()
-    video_set.add(path)
+    line = line.strip()
+    if not line:
+        continue
+    video_name, class_name = line.split('\t')
+    key = (video_name, class_name)
+    counts[key] += 1
 
-if current_class:
-    print(f"{current_class}\t{','.join(sorted(video_set))}")
+# imprimir todos los conteos
+for (video_name, class_name), count in counts.items():
+    print(f"{video_name}\t{class_name}\t{count}")
