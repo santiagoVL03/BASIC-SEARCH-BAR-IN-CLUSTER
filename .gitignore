@@ -16,4 +16,3 @@ Kitware Data.html
 /.venv
 */__pycache__/
 *.pt
-*.json
