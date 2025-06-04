@@ -1,0 +1,11 @@
+user,time,query
+ana,2025-06-03 14:05:12,SELECT * FROM metadata_general LIMIT 10;
+juan,2025-06-03 14:15:44,SELECT COUNT(*) FROM metadata_general WHERE class_id = 3;
+luis,2025-06-03 14:17:02,SELECT DISTINCT class_name FROM metadata_general;
+carlos,2025-06-03 14:18:25,SELECT archivo_json, COUNT(*) FROM metadata_general GROUP BY archivo_json;
+maria,2025-06-03 14:19:10,SELECT * FROM metadata_general WHERE confidence > 0.9;
+ana,2025-06-03 14:20:43,SELECT * FROM metadata_general WHERE class_name = 'boat';
+juan,2025-06-03 14:21:05,SELECT archivo_json, class_name, COUNT(*) FROM metadata_general GROUP BY archivo_json, class_name;
+luis,2025-06-03 14:22:58,SELECT * FROM metadata_general WHERE class_id = 8;
+maria,2025-06-03 14:25:30,SELECT class_id, COUNT(*) FROM metadata_general GROUP BY class_id;
+carlos,2025-06-03 14:27:12,SELECT * FROM metadata_general WHERE x1 > 500;
