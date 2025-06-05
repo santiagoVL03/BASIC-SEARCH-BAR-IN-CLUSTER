@@ -1,0 +1,16 @@
+nombre_usuario,url,tiempo
+luis,google.com,150
+luis,google.com,300
+luis,bing.com,100
+ana,yahoo.com,90
+ana,yahoo.com,120
+ana,google.com,60
+juan,google.com,80
+juan,google.com,100
+juan,wikipedia.org,150
+maria,stackoverflow.com,200
+maria,stackoverflow.com,180
+maria,yahoo.com,130
+carlos,duckduckgo.com,70
+carlos,medium.com,100
+carlos,medium.com,120

@@ -1,0 +1,9 @@
+url,rank,puntaje
+google.com,1,95
+stackoverflow.com,2,92
+wikipedia.org,3,90
+reddit.com,4,85
+medium.com,5,83
+yahoo.com,6,78
+duckduckgo.com,7,75
+bing.com,8,70
