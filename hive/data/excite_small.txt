@@ -1,0 +1,11 @@
+user,time,query_log
+ana,2025-06-03 14:05:12,yahoo.com
+juan,2025-06-03 14:15:44,google.com
+luis,2025-06-03 14:17:02,bing.com
+carlos,2025-06-03 14:18:25,duckduckgo.com
+maria,2025-06-03 14:19:10,yahoo.com
+ana,2025-06-03 14:20:43,google.com
+juan,2025-06-03 14:21:05,wikipedia.org
+luis,2025-06-03 14:22:58,reddit.com
+maria,2025-06-03 14:25:30,stackoverflow.com
+carlos,2025-06-03 14:27:12,medium.com

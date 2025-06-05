@@ -1,0 +1,10 @@
+CREATE EXTERNAL TABLE IF NOT EXISTS logs_excite (
+user_name STRING,
+time_date STRING,
+query_log STRING
+)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ','
+STORED AS TEXTFILE
+LOCATION '/log/'
+TBLPROPERTIES ("skip.header.line.count"="1");
