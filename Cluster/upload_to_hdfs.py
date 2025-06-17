@@ -30,8 +30,8 @@ if __name__ == "__main__":
     if not video_files:
         print("No video or metadata files found in the specified directory.")
         sys.exit(0)
-    """
     hdfs_video_directory = "/oursystem/input/video"
+    
     hdfs_metadata_directory = "/oursystem/input/metadata"
     print("Uploading video files to HDFS...")
     print("Uploading metadata files to HDFS...")
@@ -52,7 +52,7 @@ if __name__ == "__main__":
             print(f"Uploading {metadata_table} to HDFS...")
             upload_to_hdfs_hadoop(metadata_table_path, hdfs_metadata_tables_directory)
             print(f"Uploaded {metadata_table} successfully.")
-    """
+    
     hdfs_logs_directory = "/oursystem/input/logs"
     logs_files = [f for f in os.listdir(METADATA_PATH)
                      if os.path.isfile(os.path.join(METADATA_PATH, f)) and f.lower().endswith('.txt') and 'log' in f.lower()]
@@ -62,14 +62,13 @@ if __name__ == "__main__":
             print(f"Uploading {log} to HDFS...")
             upload_to_hdfs_hadoop(log_path, hdfs_logs_directory)
             print(f"Uploaded {log} successfully.")
-    # Uncomment the following lines to upload video files to HDFS
-    # for video in video_files:
-    #     video_path = os.path.join(VIDEO_PATH, video)
-    #     if os.path.isfile(video_path):
-    #         print(f"Uploading {video} to HDFS...")
-    #         upload_to_hdfs_hadoop(video_path, hdfs_video_directory)
-    #         print(f"Uploaded {video} successfully.")
-    # print("All files uploaded successfully!")
+    for video in video_files:
+        video_path = os.path.join(VIDEO_PATH, video)
+        if os.path.isfile(video_path):
+            print(f"Uploading {video} to HDFS...")
+            upload_to_hdfs_hadoop(video_path, hdfs_video_directory)
+            print(f"Uploaded {video} successfully.")
+    print("All files uploaded successfully!")
     
 """
 This script uploads video and metadata files to HDFS using Hadoop commands.
