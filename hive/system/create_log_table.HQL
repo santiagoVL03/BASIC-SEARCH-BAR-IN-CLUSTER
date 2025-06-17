@@ -1,0 +1,9 @@
+CREATE EXTERNAL TABLE IF NOT EXISTS logs_system (
+  user STRING,
+  time_date STRING,
+  video_name STRING
+)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ','
+STORED AS TEXTFILE
+LOCATION '/oursystem/input/logs/logs_system.txt';
