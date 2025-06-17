@@ -6,4 +6,4 @@ CREATE EXTERNAL TABLE IF NOT EXISTS logs_system (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY ','
 STORED AS TEXTFILE
-LOCATION '/oursystem/input/logs/logs_system.txt';
+LOCATION '/oursystem/input/logs/';

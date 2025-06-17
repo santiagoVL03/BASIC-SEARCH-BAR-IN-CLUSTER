@@ -42,6 +42,6 @@ with open(salida_path, mode="w", newline="") as file:
                 print(f"[!] Error en el archivo JSON: {filename}, se omite.")
                 continue
 
-with open(videos_path, mode="w") as f_vid:
-    for vid in sorted(video_ids_unicos):
-        f_vid.write(vid + "\n")
+# with open(videos_path, mode="w") as f_vid:
+#     for vid in sorted(video_ids_unicos):
+#         f_vid.write(vid + "\n")

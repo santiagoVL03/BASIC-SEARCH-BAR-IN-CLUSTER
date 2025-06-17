@@ -12,5 +12,5 @@ CREATE EXTERNAL TABLE metadata_general (
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY ','
 STORED AS TEXTFILE
-LOCATION '/oursystem/input/metadata_table/metadata_salida_general.txt'
+LOCATION '/oursystem/input/metadata_table/'
 TBLPROPERTIES ("skip.header.line.count"="1");
