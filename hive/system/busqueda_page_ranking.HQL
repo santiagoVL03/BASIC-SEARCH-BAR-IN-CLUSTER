@@ -5,6 +5,11 @@
 -- The query uses a LEFT JOIN to ensure that all videos from the metadata_general table are included, even if they have no corresponding entries in the logs_system table.
 -- The results will show the video names along with their page ranking, which is the count of how many times they were accessed in the logs_system table.
 
+INSERT OVERWRITE DIRECTORY '/oursystem/output/page_rank/${search_class}'
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY '\t'
+STORED AS TEXTFILE
+
 SELECT 
     mg.video_name,
     COUNT(ls.video_name) AS page_ranking
